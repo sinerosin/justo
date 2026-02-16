@@ -1,0 +1,74 @@
+:host {
+  --bg-black: #000000;
+  --card-dark: #121212;
+  --item-dark: #1a1a1a;
+  --accent-red: #ff0000;
+}
+
+.dark-theme { --background: var(--bg-black); }
+
+.stat-card {
+  background: var(--card-dark);
+  border: 1px solid #222;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  margin: 5px;
+
+  .stat-icon-bg {
+    width: 45px; height: 45px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-right: 15px;
+    
+    &.star { background: rgba(255, 204, 0, 0.1); color: #ffcc00; }
+    &.chart { background: rgba(80, 165, 255, 0.1); color: #50a5ff; }
+    &.check { background: rgba(45, 211, 111, 0.1); color: #2dd36f; }
+  }
+
+  .stat-info {
+    p { margin: 0; font-size: 9px; color: #666; font-weight: 800; }
+    h2 { margin: 0; color: #fff; font-weight: 800; font-size: 1.4rem; }
+  }
+}
+
+.prediction-card {
+  background: var(--card-dark);
+  border: 1px solid #222;
+  border-radius: 16px;
+  padding: 15px;
+  margin-bottom: 12px;
+
+  .bet-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 15px;
+    span { color: #444; font-size: 10px; font-weight: 800; }
+  }
+
+  .teams-info { margin-bottom: 10px; p { color: #fff; font-weight: 700; margin: 0; } }
+
+  .scores-row {
+    display: flex; align-items: flex-end; gap: 20px;
+    
+    .score-block {
+      small { font-size: 8px; color: #555; font-weight: 800; display: block; margin-bottom: 4px; }
+      .box {
+        background: #1a1a1a; color: #fff; padding: 6px 12px; border-radius: 8px;
+        font-weight: 800; border: 1px solid #333;
+        &.real { border-color: var(--accent-red); color: var(--accent-red); }
+      }
+    }
+
+    .points-earned {
+      margin-left: auto;
+      span { font-weight: 900; color: #444; font-size: 14px; }
+      span.plus { color: #2dd36f; }
+    }
+  }
+}
+
+.empty-state {
+  text-align: center; padding: 50px; color: #333;
+  ion-icon { font-size: 64px; margin-bottom: 10px; }
+}

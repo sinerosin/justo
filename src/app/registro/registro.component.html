@@ -1,0 +1,70 @@
+<ion-content [fullscreen]="true" class="dark-theme">
+  <ion-grid class="ion-no-padding">
+    <ion-row class="main-row">
+      
+      <ion-col size="12" size-md="6" class="left-panel ion-hide-sm-down">
+        <div class="overlay"></div>
+        <div class="content-wrapper">
+          <h1>Únete a <span>BetStars</span></h1>
+          <p>Predice resultados, desafía a tus amigos y únete a la comunidad global.</p>
+          
+          <div class="badge-container">
+            <div class="custom-badge">
+              <ion-icon name="trending-up-outline"></ion-icon> CUOTAS EN VIVO
+            </div>
+            <div class="custom-badge">
+              <ion-icon name="people-outline"></ion-icon> 50K+ USUARIOS
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="12" size-md="6" class="right-panel">
+        <div class="form-container">
+          <ion-card class="register-card">
+            <div class="card-header">
+              <h2>Crear Tu Cuenta</h2>
+              <p>Introduce tus datos para empezar a ganar.</p>
+            </div>
+
+            <ion-card-content>
+              <ion-list lines="none">
+                <ion-label>Nombre de usuario</ion-label>
+                <ion-item class="custom-input">
+                  <ion-input type="text" placeholder="Elige un nombre único" [(ngModel)]="userData.username"></ion-input>
+                </ion-item>
+
+                <ion-label>Correo electrónico</ion-label>
+                <ion-item class="custom-input">
+                  <ion-input type="email" placeholder="tu@email.com" [(ngModel)]="userData.email"></ion-input>
+                </ion-item>
+
+                <ion-label>Contraseña</ion-label>
+                <ion-item class="custom-input">
+                  <ion-input type="password" placeholder="Crea una contraseña" [(ngModel)]="userData.password"></ion-input>
+                </ion-item>
+
+                <ion-label>Confirmar contraseña</ion-label>
+                <ion-item class="custom-input">
+                  <ion-input type="password" placeholder="Repite tu contraseña" [(ngModel)]="userData.passwordConfirmation"></ion-input>
+                </ion-item>
+              </ion-list>
+
+              <ion-button expand="block" color="danger" class="main-button" (click)="onRegister()">
+                Crear Cuenta
+              </ion-button>
+
+              <div class="footer-text">
+                ¿Ya tienes cuenta? 
+                <ion-text color="danger" (click)="navigateToLogin()" style="cursor: pointer;">
+                  <b>Inicia sesión</b>
+                </ion-text>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+</ion-content>

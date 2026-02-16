@@ -1,27 +1,40 @@
-#container {
-  text-align: center;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+:host {
+  --bg-black: #050505;
+  --card-dark: #0d0d0d;
+  --accent-red: #ff003c;
+  --neon-glow: 0 0 10px rgba(255, 0, 60, 0.4);
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.main-container { --background: var(--bg-black); }
+
+.sidebar-content {
+  --background: var(--bg-black);
+  .brand-section {
+    padding: 30px 20px; display: flex; align-items: center; gap: 12px;
+    .neon-text { color: var(--accent-red); font-size: 32px; filter: drop-shadow(var(--neon-glow)); }
+    h3 { color: #fff; margin: 0; font-weight: 800; letter-spacing: 2px; }
+  }
+  .menu-list ion-item {
+    --background: transparent; --color: #555; margin: 8px 15px; font-weight: 700;
+    &.active-item { --color: #fff; border-left: 3px solid var(--accent-red); background: rgba(255,0,60,0.05); }
+  }
+  .sidebar-footer {
+    padding: 20px;
+    .user-item { 
+      --background: #111; border: 1px solid #222; 
+      .avatar-sidebar { border: 1px solid var(--accent-red); color: var(--accent-red); display: flex; padding: 4px; }
+    }
+  }
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+.match-card {
+  background: var(--card-dark); border: 1px solid #1a1a1a; border-left: 4px solid var(--accent-red);
+  .scoreboard { 
+    display: flex; justify-content: space-around; align-items: center; padding: 20px 0;
+    .score { font-size: 2rem; font-weight: 900; color: #fff; text-shadow: var(--neon-glow); }
+    .team img { width: 40px; filter: grayscale(0.5); }
+  }
 }
 
-#container a {
-  text-decoration: none;
-}
+.detail-btn { --background: var(--accent-red); --box-shadow: var(--neon-glow); font-weight: 800; }

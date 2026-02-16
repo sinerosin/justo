@@ -50,50 +50,42 @@
   </ion-menu>
 
   <div class="ion-page" id="main-content">
-    <ion-header class="ion-no-border">
-      <ion-toolbar color="black">
-        <ion-buttons slot="start">
-          <ion-menu-button color="danger"></ion-menu-button>
-        </ion-buttons>
-        <ion-title>TERMINAL_PARTIDOS</ion-title>
-      </ion-toolbar>
-    </ion-header>
+  <ion-header class="ion-no-border">
+    <ion-toolbar color="black">
+      <ion-buttons slot="start"><ion-menu-button color="danger"></ion-menu-button></ion-buttons>
+      <ion-title>CONFIG_SISTEMA</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-    <ion-content class="main-container">
-      <div class="search-section">
-        <ion-searchbar [(ngModel)]="search" (ionInput)="filters()" placeholder="BUSCAR_EQUIPO" class="custom-search"></ion-searchbar>
+  <ion-content class="dark-theme">
+    <div class="profile-wrapper">
+      <ion-card class="profile-main-card">
+        <div class="avatar-display">
+          <span class="material-symbols-outlined" style="font-size: 60px;">{{ selectedAvatar }}</span>
+        </div>
+        <div class="user-meta">
+          <h2>{{ currentUser.username }}</h2>
+          <p>MODO_DEVELOPER_ACTIVO</p>
+        </div>
+      </ion-card>
+
+      <div class="icon-selector-section">
+        <p class="label">ACTUALIZAR_AVATAR</p>
+        <div class="grid-icons">
+          <div *ngFor="let icon of avatarOptions" 
+               class="icon-node" 
+               [class.active]="selectedAvatar === icon"
+               (click)="selectAvatar(icon)">
+            <span class="material-symbols-outlined">{{ icon }}</span>
+          </div>
+        </div>
       </div>
 
-      <div class="section-title">
-        <h2>JORNADA {{ currentJornada }} <span class="material-symbols-outlined" style="color: var(--accent-red)">sensors</span></h2>
-      </div>
-
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12" size-md="6" *ngFor="let game of gamesFilter">
-            <ion-card class="match-card">
-              <div class="match-header">
-                <span>STATUS: {{ game.status | uppercase }}</span>
-                <span class="material-symbols-outlined" [style.color]="game.status === 'live' ? 'var(--accent-red)' : '#444'">fiber_manual_record</span>
-              </div>
-              <div class="scoreboard">
-                <div class="team">
-                  <img [src]="getEscudos(game.home)" />
-                  <span>{{ game.home }}</span>
-                </div>
-                <div class="result">
-                  <div class="score">{{ game.homeScore }} - {{ game.awayScore }}</div>
-                </div>
-                <div class="team">
-                  <img [src]="getEscudos(game.away)" />
-                  <span>{{ game.away }}</span>
-                </div>
-              </div>
-              <ion-button expand="block" class="detail-btn" (click)="viewDetails(game.id)">INGRESAR_DATOS</ion-button>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-content>
-  </div>
+      <ion-button expand="block" class="save-btn" (click)="saveChanges()">
+        <span class="material-symbols-outlined" slot="start">save</span>
+        GUARDAR_CAMBIOS
+      </ion-button>
+    </div>
+  </ion-content>
+</div>
 </ion-split-pane>

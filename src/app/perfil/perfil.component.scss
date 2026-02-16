@@ -1,0 +1,17 @@
+
+.profile-main-card {
+  background: #0d0d0d; border: 1px solid var(--accent-red); padding: 25px;
+  display: flex; align-items: center; gap: 20px; box-shadow: var(--neon-glow);
+  .avatar-display { color: var(--accent-red); border: 1px solid var(--accent-red); padding: 10px; }
+  h2 { color: #fff; margin: 0; font-weight: 900; }
+}
+
+.grid-icons {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; padding: 20px;
+  .icon-node {
+    background: #111; border: 1px solid #222; padding: 15px; color: #444; text-align: center;
+    &.active { border-color: var(--accent-red); color: var(--accent-red); box-shadow: var(--neon-glow); }
+  }
+}
+
+.save-btn { --background: var(--accent-red); margin: 20px; font-weight: 800; }

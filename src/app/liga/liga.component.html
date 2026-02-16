@@ -1,0 +1,141 @@
+<ion-split-pane contentId="main-content">
+ <ion-menu contentId="main-content" type="overlay">
+    <ion-content class="sidebar-content">
+      <div class="brand-section">
+        <span class="material-symbols-outlined neon-text">deployed_code</span>
+        <div>
+          <h3>BETSTARS</h3>
+          <p>SISTEMA_ACTIVO v2.0</p>
+        </div>
+      </div>
+
+      <ion-list lines="none" class="menu-list">
+        <ion-item button (click)="navigateTo('/home')" class="active-item">
+          <span class="material-symbols-outlined" slot="start">dashboard</span>
+          <ion-label>PANEL</ion-label>
+        </ion-item>
+        <ion-item button (click)="navigateTo('/liga')">
+          <span class="material-symbols-outlined" slot="start">military_tech</span>
+          <ion-label>LIGA</ion-label>
+        </ion-item>
+        <ion-item button (click)="navigateTo('/ranking')">
+          <span class="material-symbols-outlined" slot="start">leaderboard</span>
+          <ion-label>RANKING</ion-label>
+        </ion-item>
+        <ion-item button (click)="navigateTo('/perfil')">
+          <span class="material-symbols-outlined" slot="start">person</span>
+          <ion-label>PERFIL</ion-label>
+        </ion-item>
+        <ion-item button (click)="navigateTo('/historial')">
+          <span class="material-symbols-outlined" slot="start">history</span>
+          <ion-label>HISTORIAL</ion-label>
+        </ion-item>
+      </ion-list>
+
+      <div class="sidebar-footer">
+        <ion-item lines="none" class="user-item">
+          <div slot="start" class="avatar-sidebar">
+            <span class="material-symbols-outlined">{{ currentUser.avatar || 'account_circle' }}</span>
+          </div>
+          <ion-label>
+            <h2>{{ currentUser.username }}</h2>
+          </ion-label>
+        </ion-item>
+        <ion-button expand="block" fill="outline" class="logout-btn" (click)="logout()">
+          <span class="material-symbols-outlined" slot="start">logout</span>
+          LOGOUT
+        </ion-button>
+      </div>
+    </ion-content>
+  </ion-menu>
+
+  <div class="ion-page" id="main-content">
+    <ion-header class="ion-no-border">
+      <ion-toolbar>
+        <ion-buttons slot="start"><ion-menu-button></ion-menu-button></ion-buttons>
+        <div class="header-title-group">
+          <ion-title>Clasificación y Resultados</ion-title>
+          <small>LA LIGA BETBUDDY</small>
+        </div>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="main-container">
+      <div class="content-padding">
+        
+        <ion-card class="table-card">
+          <div class="table-header">
+            <h3>Tabla de Clasificación</h3>
+            <p>TEMPORADA 2025/26</p>
+          </div>
+          <div class="table-responsive">
+            <table class="league-table">
+              <thead>
+                <tr>
+                  <th>POS</th>
+                  <th class="text-left">EQUIPO</th>
+                  <th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>PTS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let team of teams; let i = index">
+                  <td class="pos">{{ i + 1 }}</td>
+                  <td class="team-cell">
+                    <img [src]="getEscudo(team.name)" />
+                    <span>{{ team.name }}</span>
+                  </td>
+                  <td>{{ team.pj }}</td><td>{{ team.g }}</td><td>{{ team.e }}</td>
+                  <td>{{ team.p }}</td><td>{{ team.gf }}</td><td>{{ team.gc }}</td>
+                  <td class="pts">{{ team.pts }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </ion-card>
+
+        <div class="results-nav-header">
+          <h3>Resultados por Jornada</h3>
+  
+          <div class="nav-controls">
+            <ion-button fill="clear" (click)="changeJornada(-1)" [disabled]="currentJornada <= 1">
+              <span class="material-symbols-outlined">chevron_left</span>
+            </ion-button>
+
+            <div class="jornada-label">
+              <span>Jornada {{ currentJornada }}</span>
+                <ion-badge color="primary" *ngIf="currentJornada === realCurrentJornada">ACTUAL</ion-badge>
+            </div>
+
+            <ion-button fill="clear" (click)="changeJornada(1)" [disabled]="currentJornada >= maxJornada">
+              <span class="material-symbols-outlined">chevron_right</span>
+            </ion-button>
+          </div>
+        </div>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" size-md="6" *ngFor="let game of jornadaPartidos">
+              <ion-card class="mini-match-card">
+                <div class="mini-row">
+                  <div class="mini-team">
+                    <img [src]="getEscudo(game.home)" />
+                    <span>{{ game.home }}</span>
+                  </div>
+                  <div class="mini-score">{{ game.homeScore }}</div>
+                </div>
+                <div class="mini-row">
+                  <div class="mini-team">
+                    <img [src]="getEscudo(game.away)" />
+                    <span>{{ game.away }}</span>
+                  </div>
+                  <div class="mini-score">{{ game.awayScore }}</div>
+                </div>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </div>
+    </ion-content>
+  </div>
+</ion-split-pane>

@@ -50,50 +50,39 @@
   </ion-menu>
 
   <div class="ion-page" id="main-content">
-    <ion-header class="ion-no-border">
-      <ion-toolbar color="black">
-        <ion-buttons slot="start">
-          <ion-menu-button color="danger"></ion-menu-button>
-        </ion-buttons>
-        <ion-title>TERMINAL_PARTIDOS</ion-title>
-      </ion-toolbar>
-    </ion-header>
+  <ion-header class="ion-no-border">
+    <ion-toolbar color="black">
+      <ion-buttons slot="start"><ion-menu-button color="danger"></ion-menu-button></ion-buttons>
+      <ion-title>TOP_OPERADORES</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-    <ion-content class="main-container">
-      <div class="search-section">
-        <ion-searchbar [(ngModel)]="search" (ionInput)="filters()" placeholder="BUSCAR_EQUIPO" class="custom-search"></ion-searchbar>
+  <ion-content class="dark-theme">
+    <div class="ranking-wrapper">
+      <div class="podium-container">
+        <div class="podium-box first">
+          <div class="avatar-glow">
+            <span class="material-symbols-outlined" style="font-size: 50px; color: var(--accent-red)">trophy</span>
+          </div>
+          <div class="box">
+            <span class="pts">{{ topThree[0]?.points }} PTS</span>
+            <span class="rank">#1</span>
+          </div>
+          <span class="username">{{ topThree[0]?.username }}</span>
+        </div>
       </div>
 
-      <div class="section-title">
-        <h2>JORNADA {{ currentJornada }} <span class="material-symbols-outlined" style="color: var(--accent-red)">sensors</span></h2>
-      </div>
-
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12" size-md="6" *ngFor="let game of gamesFilter">
-            <ion-card class="match-card">
-              <div class="match-header">
-                <span>STATUS: {{ game.status | uppercase }}</span>
-                <span class="material-symbols-outlined" [style.color]="game.status === 'live' ? 'var(--accent-red)' : '#444'">fiber_manual_record</span>
-              </div>
-              <div class="scoreboard">
-                <div class="team">
-                  <img [src]="getEscudos(game.home)" />
-                  <span>{{ game.home }}</span>
-                </div>
-                <div class="result">
-                  <div class="score">{{ game.homeScore }} - {{ game.awayScore }}</div>
-                </div>
-                <div class="team">
-                  <img [src]="getEscudos(game.away)" />
-                  <span>{{ game.away }}</span>
-                </div>
-              </div>
-              <ion-button expand="block" class="detail-btn" (click)="viewDetails(game.id)">INGRESAR_DATOS</ion-button>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-content>
-  </div>
+      <ion-card class="ranking-table-card">
+        <ion-list lines="full">
+          <ion-item *ngFor="let user of leaderboard; let i = index">
+            <div class="pos-badge" [class.gold]="i===0">{{ i + 1 }}</div>
+            <span class="material-symbols-outlined" slot="start" style="color: var(--accent-red)">{{ user.avatar || 'account_circle' }}</span>
+            <ion-label><h3>{{ user.username }}</h3></ion-label>
+            <ion-text slot="end" class="final-pts">{{ user.points }}</ion-text>
+          </ion-item>
+        </ion-list>
+      </ion-card>
+    </div>
+  </ion-content>
+</div>
 </ion-split-pane>

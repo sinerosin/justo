@@ -1,0 +1,120 @@
+.dark-theme {
+  --background: #000000; // Fondo negro puro
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: 20px;
+
+  .header-logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    
+    ion-icon {
+      font-size: 28px;
+      margin-right: 8px;
+    }
+  }
+
+  .login-card {
+    width: 100%;
+    max-width: 400px;
+    background: #1a1a1a; // Gris muy oscuro para la tarjeta
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(255, 0, 0, 0.1); // Sombra con un toque rojo
+    padding: 20px 10px;
+    margin: 0;
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 20px;
+
+      .icon-circle {
+        background: rgba(255, 0, 0, 0.1);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+        font-size: 30px;
+      }
+
+      h2 {
+        color: #fff;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+
+      p {
+        color: #888;
+        font-size: 14px;
+      }
+    }
+  }
+
+  ion-list {
+    background: transparent;
+    padding: 0;
+  }
+
+  ion-label {
+    display: block;
+    color: #bbb;
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .custom-input {
+    --background: #252525;
+    --color: #fff;
+    --placeholder-color: #666;
+    --padding-start: 12px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    margin-bottom: 15px;
+    
+    ion-icon {
+      color: #666;
+    }
+  }
+  .brand-name {
+    font-size: 32px;
+    color: var(--ion-color-danger); 
+  }
+
+  .password-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .forgot-link {
+      font-size: 12px;
+      cursor: pointer;
+    }
+  }
+
+  .login-button {
+    --border-radius: 8px;
+    margin-top: 25px;
+    height: 48px;
+    font-weight: 600;
+    text-transform: none;
+  }
+
+  .footer-link {
+    margin-top: 25px;
+    color: #888;
+    font-size: 14px;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,132 @@
+<ion-split-pane contentId="main-content">
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-content class="sidebar-content">
+      <div class="brand-section">
+        <span class="material-symbols-outlined neon-text">deployed_code</span>
+        <div>
+          <h3>BETSTARS</h3>
+          <p>SISTEMA_ACTIVO v2.0</p>
+        </div>
+      </div>
+
+      <ion-list lines="none" class="menu-list">
+        <ion-item button (click)="navigateTo('/home')" class="active-item">
+          <span class="material-symbols-outlined" slot="start">dashboard</span>
+          <ion-label>PANEL</ion-label>
+        </ion-item>
+        <ion-item button (click)="navigateTo('/liga')">
+          <span class="material-symbols-outlined" slot="start">military_tech</span>
+          <ion-label>LIGA</ion-label>
+        </ion-item>
+        <ion-item button (click)="navigateTo('/ranking')">
+          <span class="material-symbols-outlined" slot="start">leaderboard</span>
+          <ion-label>RANKING</ion-label>
+        </ion-item>
+        <ion-item button (click)="navigateTo('/perfil')">
+          <span class="material-symbols-outlined" slot="start">person</span>
+          <ion-label>PERFIL</ion-label>
+        </ion-item>
+        <ion-item button (click)="navigateTo('/historial')">
+          <span class="material-symbols-outlined" slot="start">history</span>
+          <ion-label>HISTORIAL</ion-label>
+        </ion-item>
+      </ion-list>
+
+      <div class="sidebar-footer">
+        <ion-item lines="none" class="user-item">
+          <div slot="start" class="avatar-sidebar">
+            <span class="material-symbols-outlined">{{ currentUser.avatar || 'account_circle' }}</span>
+          </div>
+          <ion-label>
+            <h2>{{ currentUser.username }}</h2>
+          </ion-label>
+        </ion-item>
+        <ion-button expand="block" fill="outline" class="logout-btn" (click)="logout()">
+          <span class="material-symbols-outlined" slot="start">logout</span>
+          LOGOUT
+        </ion-button>
+      </div>
+    </ion-content>
+  </ion-menu>
+
+  <div class="ion-page" id="main-content">
+    <ion-header class="ion-no-border">
+      <ion-toolbar color="black">
+        <ion-buttons slot="start"><ion-menu-button color="danger"></ion-menu-button></ion-buttons>
+        <div class="header-title-group">
+          <ion-title>Mi Historial</ion-title>
+          <small>TUS PREDICCIONES</small>
+        </div>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="dark-theme">
+      <div class="historial-wrapper">
+        
+        <ion-grid class="stats-grid">
+          <ion-row>
+            <ion-col size="12" size-md="4">
+              <ion-card class="stat-card">
+                <div class="stat-icon-bg star"><ion-icon name="star-outline"></ion-icon></div>
+                <div class="stat-info"><p>TOTAL PUNTOS</p><h2>{{ stats.totalPoints }}</h2></div>
+              </ion-card>
+            </ion-col>
+            <ion-col size="12" size-md="4">
+              <ion-card class="stat-card">
+                <div class="stat-icon-bg chart"><ion-icon name="bar-chart-outline"></ion-icon></div>
+                <div class="stat-info"><p>WIN RATE</p><h2>{{ stats.winRate }}%</h2></div>
+              </ion-card>
+            </ion-col>
+            <ion-col size="12" size-md="4">
+              <ion-card class="stat-card">
+                <div class="stat-icon-bg check"><ion-icon name="checkmark-circle-outline"></ion-icon></div>
+                <div class="stat-info"><p>TOTAL PORRAS</p><h2>{{ stats.totalBets }}</h2></div>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <div class="section-title">
+          <ion-icon name="time-outline" color="danger"></ion-icon>
+          <h3>Últimas Predicciones</h3>
+        </div>
+
+        <div class="predictions-list">
+          <ion-card class="prediction-card" *ngFor="let bet of userBets">
+            <div class="bet-header">
+              <span>JORNADA {{ bet.match?.jornada }}</span>
+              <ion-badge [color]="bet.status === 'win' ? 'success' : (bet.status === 'loss' ? 'danger' : 'medium')">
+                {{ bet.status | uppercase }}
+              </ion-badge>
+            </div>
+
+            <div class="bet-comparison">
+              <div class="teams-info">
+                <p>{{ bet.match?.home }} vs {{ bet.match?.away }}</p>
+              </div>
+              <div class="scores-row">
+                <div class="score-block">
+                  <small>TU APUESTA</small>
+                  <div class="box">{{ bet.homeScore }} - {{ bet.awayScore }}</div>
+                </div>
+                <div class="score-block" *ngIf="bet.match?.status === 'finished'">
+                  <small>REAL</small>
+                  <div class="box real">{{ bet.match?.homeScore }} - {{ bet.match?.awayScore }}</div>
+                </div>
+                <div class="points-earned">
+                  <span [class.plus]="bet.pointsEarned > 0">+{{ bet.pointsEarned }} PTS</span>
+                </div>
+              </div>
+            </div>
+          </ion-card>
+
+          <div class="empty-state" *ngIf="userBets.length === 0">
+            <ion-icon name="receipt-outline"></ion-icon>
+            <p>Aún no has realizado ninguna apuesta.</p>
+          </div>
+        </div>
+
+      </div>
+    </ion-content>
+  </div>
+</ion-split-pane>
