@@ -1,5 +1,5 @@
 <ion-split-pane contentId="main-content">
- <ion-menu contentId="main-content" type="overlay">
+  <ion-menu contentId="main-content" type="overlay">
     <ion-content class="sidebar-content">
       <div class="brand-section">
         <span class="material-symbols-outlined neon-text">deployed_code</span>
@@ -10,11 +10,11 @@
       </div>
 
       <ion-list lines="none" class="menu-list">
-        <ion-item button (click)="navigateTo('/home')" class="active-item">
+        <ion-item button (click)="navigateTo('/home')" >
           <span class="material-symbols-outlined" slot="start">dashboard</span>
           <ion-label>PANEL</ion-label>
         </ion-item>
-        <ion-item button (click)="navigateTo('/liga')">
+        <ion-item button (click)="navigateTo('/liga')"class="active-item">
           <span class="material-symbols-outlined" slot="start">military_tech</span>
           <ion-label>LIGA</ion-label>
         </ion-item>
@@ -55,7 +55,6 @@
         <ion-buttons slot="start"><ion-menu-button></ion-menu-button></ion-buttons>
         <div class="header-title-group">
           <ion-title>Clasificación y Resultados</ion-title>
-          <small>LA LIGA BETBUDDY</small>
         </div>
       </ion-toolbar>
     </ion-header>
@@ -81,7 +80,7 @@
                 <tr *ngFor="let team of teams; let i = index">
                   <td class="pos">{{ i + 1 }}</td>
                   <td class="team-cell">
-                    <img [src]="getEscudo(team.name)" />
+                    <img class="img" [src]="getEscudo(team.name)" />
                     <span>{{ team.name }}</span>
                   </td>
                   <td>{{ team.pj }}</td><td>{{ team.g }}</td><td>{{ team.e }}</td>

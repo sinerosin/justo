@@ -2,87 +2,108 @@
   <ion-menu contentId="main-content" type="overlay">
     <ion-content class="sidebar-content">
       <div class="brand-section">
-        <span class="material-symbols-outlined neon-text">deployed_code</span>
+        <ion-icon name="cube" color="danger"></ion-icon>
         <div>
-          <h3>BETSTARS</h3>
-          <p>SISTEMA_ACTIVO v2.0</p>
+          <h3>BetStars</h3>
+          <p>GANA CON PASIÓN</p>
         </div>
       </div>
 
       <ion-list lines="none" class="menu-list">
-        <ion-item button (click)="navigateTo('/home')" class="active-item">
-          <span class="material-symbols-outlined" slot="start">dashboard</span>
-          <ion-label>PANEL</ion-label>
+        <ion-item button (click)="navigateTo('/home')" [class.active-item]="router.url.includes('home')">
+          <ion-icon slot="start" name="grid-outline"></ion-icon>
+          <ion-label>Panel</ion-label>
         </ion-item>
-        <ion-item button (click)="navigateTo('/liga')">
-          <span class="material-symbols-outlined" slot="start">military_tech</span>
-          <ion-label>LIGA</ion-label>
+        <ion-item button (click)="navigateTo('/liga')" [class.active-item]="router.url.includes('liga')">
+          <ion-icon slot="start" name="trophy-outline"></ion-icon>
+          <ion-label>Liga</ion-label>
         </ion-item>
-        <ion-item button (click)="navigateTo('/ranking')">
-          <span class="material-symbols-outlined" slot="start">leaderboard</span>
-          <ion-label>RANKING</ion-label>
+        <ion-item button (click)="navigateTo('/ranking')" [class.active-item]="router.url.includes('ranking')">
+          <ion-icon slot="start" name="stats-chart-outline"></ion-icon>
+          <ion-label>Ranking</ion-label>
         </ion-item>
-        <ion-item button (click)="navigateTo('/perfil')">
-          <span class="material-symbols-outlined" slot="start">person</span>
-          <ion-label>PERFIL</ion-label>
-        </ion-item>
-        <ion-item button (click)="navigateTo('/historial')">
-          <span class="material-symbols-outlined" slot="start">history</span>
-          <ion-label>HISTORIAL</ion-label>
+        <ion-item button (click)="navigateTo('/perfil')" [class.active-item]="router.url.includes('perfil')">
+          <ion-icon slot="start" name="person-outline"></ion-icon>
+          <ion-label>Mi Perfil</ion-label>
         </ion-item>
       </ion-list>
 
       <div class="sidebar-footer">
         <ion-item lines="none" class="user-item">
-          <div slot="start" class="avatar-sidebar">
-            <span class="material-symbols-outlined">{{ currentUser.avatar || 'account_circle' }}</span>
-          </div>
-          <ion-label>
-            <h2>{{ currentUser.username }}</h2>
-          </ion-label>
+          <ion-avatar slot="start"><img [src]="currentUser.profPicture" /></ion-avatar>
+          <ion-label>{{ currentUser.username }}</ion-label>
         </ion-item>
-        <ion-button expand="block" fill="outline" class="logout-btn" (click)="logout()">
-          <span class="material-symbols-outlined" slot="start">logout</span>
-          LOGOUT
+        <ion-button expand="block" fill="clear" color="danger" (click)="logout()">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon> Cerrar Sesión
         </ion-button>
       </div>
     </ion-content>
   </ion-menu>
 
   <div class="ion-page" id="main-content">
-  <ion-header class="ion-no-border">
-    <ion-toolbar color="black">
-      <ion-buttons slot="start"><ion-menu-button color="danger"></ion-menu-button></ion-buttons>
-      <ion-title>TOP_OPERADORES</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-header class="ion-no-border">
+      <ion-toolbar>
+        <ion-buttons slot="start"><ion-menu-button></ion-menu-button></ion-buttons>
+        <ion-title>Ranking Global</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-  <ion-content class="dark-theme">
-    <div class="ranking-wrapper">
-      <div class="podium-container">
-        <div class="podium-box first">
-          <div class="avatar-glow">
-            <span class="material-symbols-outlined" style="font-size: 50px; color: var(--accent-red)">trophy</span>
+    <ion-content class="light-bg">
+      <div class="ranking-wrapper">
+        
+        <div class="podium-container" *ngIf="topThree.length > 0">
+          
+          <div class="podium-box second" *ngIf="topThree[1]">
+            <ion-avatar><img [src]="topThree[1].avatar === 'account_circle' ? 'assets/default.png' : topThree[1].avatar" /></ion-avatar>
+            <div class="box">
+              <span class="pts">{{ topThree[1].points }} pts</span>
+              <span class="rank">#2</span>
+            </div>
+            <span class="username">{{ topThree[1].username }}</span>
           </div>
-          <div class="box">
-            <span class="pts">{{ topThree[0]?.points }} PTS</span>
-            <span class="rank">#1</span>
+
+          <div class="podium-box first" *ngIf="topThree[0]">
+            <ion-avatar class="winner"><img [src]="topThree[0].avatar === 'account_circle' ? 'assets/default.png' : topThree[0].avatar" /></ion-avatar>
+            <div class="box">
+              <span class="pts">{{ topThree[0].points }} pts</span>
+              <span class="rank"><ion-icon name="trophy"></ion-icon> #1</span>
+            </div>
+            <span class="username">{{ topThree[0].username }}</span>
           </div>
-          <span class="username">{{ topThree[0]?.username }}</span>
+
+          <div class="podium-box third" *ngIf="topThree[2]">
+            <ion-avatar><img [src]="topThree[2].avatar === 'account_circle' ? 'assets/default.png' : topThree[2].avatar" /></ion-avatar>
+            <div class="box">
+              <span class="pts">{{ topThree[2].points }} pts</span>
+              <span class="rank">#3</span>
+            </div>
+            <span class="username">{{ topThree[2].username }}</span>
+          </div>
         </div>
-      </div>
 
-      <ion-card class="ranking-table-card">
-        <ion-list lines="full">
-          <ion-item *ngFor="let user of leaderboard; let i = index">
-            <div class="pos-badge" [class.gold]="i===0">{{ i + 1 }}</div>
-            <span class="material-symbols-outlined" slot="start" style="color: var(--accent-red)">{{ user.avatar || 'account_circle' }}</span>
-            <ion-label><h3>{{ user.username }}</h3></ion-label>
-            <ion-text slot="end" class="final-pts">{{ user.points }}</ion-text>
-          </ion-item>
-        </ion-list>
-      </ion-card>
-    </div>
-  </ion-content>
-</div>
+        <ion-card class="ranking-table-card">
+          <div class="table-header-row">
+            <span class="col-pos">POSICIÓN</span>
+            <span class="col-user">USUARIO</span>
+            <span class="col-pts">PUNTOS</span>
+          </div>
+          
+          <ion-list lines="full">
+            <ion-item *ngFor="let user of leaderboard; let i = index">
+              <div class="pos-badge" [class.gold]="i===0" [class.silver]="i===1" [class.bronze]="i===2">
+                {{ i + 1 }}
+              </div>
+              <ion-avatar slot="start">
+                <img [src]="user.avatar === 'account_circle' ? 'assets/default.png' : user.avatar" />
+              </ion-avatar>
+              <ion-label>
+                <h3>{{ user.username }}</h3>
+              </ion-label>
+              <ion-text slot="end" class="final-pts">{{ user.points }}</ion-text>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+      </div>
+    </ion-content>
+  </div>
 </ion-split-pane>

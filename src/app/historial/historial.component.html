@@ -1,5 +1,5 @@
 <ion-split-pane contentId="main-content">
-  <ion-menu contentId="main-content" type="overlay">
+ <ion-menu contentId="main-content" type="overlay">
     <ion-content class="sidebar-content">
       <div class="brand-section">
         <span class="material-symbols-outlined neon-text">deployed_code</span>
@@ -10,7 +10,7 @@
       </div>
 
       <ion-list lines="none" class="menu-list">
-        <ion-item button (click)="navigateTo('/home')" class="active-item">
+        <ion-item button (click)="navigateTo('/home')" >
           <span class="material-symbols-outlined" slot="start">dashboard</span>
           <ion-label>PANEL</ion-label>
         </ion-item>
@@ -26,7 +26,7 @@
           <span class="material-symbols-outlined" slot="start">person</span>
           <ion-label>PERFIL</ion-label>
         </ion-item>
-        <ion-item button (click)="navigateTo('/historial')">
+        <ion-item button (click)="navigateTo('/historial')" class="active-item">
           <span class="material-symbols-outlined" slot="start">history</span>
           <ion-label>HISTORIAL</ion-label>
         </ion-item>

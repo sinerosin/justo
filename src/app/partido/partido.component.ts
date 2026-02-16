@@ -17,7 +17,7 @@ import { Preferences } from '@capacitor/preferences';
 export class PartidoComponent implements OnInit {
   public game?: Game;
   public standings: any[] = [];
-  public currentUser: any = { username: 'alex', avatar: 'person-circle-outline', points: 0 };
+  public currentUser: any = { username: 'alex', avatar: 'person_circle', id: 0 };
   public saveBet: boolean = false;
   
   public betData = {
@@ -58,6 +58,7 @@ export class PartidoComponent implements OnInit {
     if (value) {
       const user = JSON.parse(value);
       this.currentUser = {
+        ...user,
         username: user.username,
         profPicture: `https://api.dicebear.com/7.x/adventurer/svg?seed=${user.username}`
       };

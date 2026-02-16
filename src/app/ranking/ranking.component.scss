@@ -1,207 +1,188 @@
-// --- VARIABLES Y CONFIGURACIÓN GENERAL ---
-.light-bg {
-  --background: #f4f7f9; // Fondo grisáceo muy suave para resaltar las tarjetas
+/* Variables Globales de Estilo */
+:root {
+  --bg-deep-black: #0a0a0b;
+  --bg-card: #141416;
+  --accent-red: #ff003c;
+  --neon-glow: 0 0 15px rgba(255, 0, 60, 0.4);
+  --border-color: rgba(255, 0, 60, 0.2);
+  --glass-effect: rgba(255, 255, 255, 0.03);
 }
 
+/* Fondo general de la App */
+.dark-theme, .sidebar-content {
+  --background: var(--bg-deep-black);
+  background: var(--bg-deep-black);
+  font-family: 'Orbitron', 'Inter', sans-serif; /* Recomendado importar Orbitron de Google Fonts */
+}
+
+/* --- SIDEBAR (MENU) --- */
+.brand-section {
+  padding: 30px 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(to bottom, #1a0208, transparent);
+}
+
+.brand-section h3 {
+  color: #fff;
+  letter-spacing: 4px;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.brand-section p {
+  color: var(--accent-red);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-shadow: var(--neon-glow);
+}
+
+.neon-text {
+  font-size: 3rem !important;
+  color: var(--accent-red);
+  filter: drop-shadow(var(--neon-glow));
+}
+
+.menu-list {
+  background: transparent !important;
+  margin-top: 20px;
+}
+
+ion-item {
+  --background: transparent;
+  --color: #a0a0a0;
+  --transition: 0.3s;
+  margin: 5px 15px;
+  border-radius: 8px;
+}
+
+.active-item {
+  --color: #fff;
+  background: rgba(255, 0, 60, 0.1) !important;
+  border-left: 4px solid var(--accent-red);
+  box-shadow: inset 10px 0 20px rgba(255, 0, 60, 0.05);
+}
+
+/* --- PODIUM / RANKING --- */
 .ranking-wrapper {
-  padding: 24px 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 20px;
+  background: radial-gradient(circle at top, #20050b 0%, var(--bg-deep-black) 70%);
 }
 
-// --- ESTILOS DE LA BARRA LATERAL (MENU) ---
-.sidebar-content {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-
-  .brand-section {
-    padding: 30px 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    ion-icon { font-size: 32px; }
-    h3 { margin: 0; font-weight: 800; color: #1a202c; }
-    p { margin: 0; font-size: 10px; color: #a0aec0; letter-spacing: 1px; }
-  }
-
-  .menu-list {
-    background: transparent;
-    
-    ion-item {
-      --background: transparent;
-      --color: #718096;
-      --padding-start: 20px;
-      margin: 4px 10px;
-      border-radius: 12px;
-      font-weight: 600;
-
-      &.active-item {
-        --background: #e53e3e; // Rojo BetStars
-        --color: white;
-        box-shadow: 0 4px 12px rgba(229, 62, 62, 0.2);
-      }
-      
-      ion-icon { margin-right: 16px; font-size: 20px; }
-    }
-  }
-
-  .sidebar-footer {
-    margin-top: auto;
-    padding: 20px;
-    border-top: 1px solid #edf2f7;
-
-    .user-item {
-      --background: #f8fafc;
-      border-radius: 12px;
-      margin-bottom: 10px;
-      
-      ion-avatar { width: 36px; height: 36px; }
-      h2 { font-size: 14px; font-weight: 700; color: #2d3748; margin: 0; }
-      p { font-size: 10px; color: #a0aec0; margin: 0; }
-    }
-
-    .logout-btn {
-      --color: #e53e3e;
-      font-weight: 700;
-      font-size: 12px;
-    }
-  }
-}
-
-// --- ESTILOS DEL PODIO (TOP 3) ---
 .podium-container {
   display: flex;
-  align-items: flex-end;
   justify-content: center;
-  gap: 12px;
   margin-bottom: 40px;
-  width: 100%;
-  max-width: 450px;
-  padding-top: 40px;
-
-  .podium-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 1;
-
-    ion-avatar {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 10px;
-      background: #fff;
-      border: 2px solid #e2e8f0;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      
-      &.winner {
-        width: 75px;
-        height: 75px;
-        border: 3px solid #ffcc00; // Oro
-        box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
-      }
-    }
-
-    .box {
-      background: white;
-      width: 100%;
-      border-radius: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
-      border: 1px solid #edf2f7;
-
-      .pts { color: #007bff; font-weight: 800; font-size: 1rem; }
-      .rank { 
-        color: #718096; font-size: 0.8rem; font-weight: 700; margin-top: 4px;
-        display: flex; align-items: center; gap: 3px;
-        ion-icon { color: #d69e2e; font-size: 14px; }
-      }
-    }
-
-    // Alturas dinámicas para efecto podio
-    &.first .box { height: 120px; border: 2px solid #ffcc00; }
-    &.second .box { height: 95px; }
-    &.third .box { height: 85px; }
-    
-    .username {
-      margin-top: 10px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: #2d3748;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      width: 100%;
-      text-align: center;
-    }
-  }
+  padding-top: 20px;
 }
 
-// --- ESTILOS DE LA TABLA DE RANKING ---
+.podium-box.first {
+  text-align: center;
+  position: relative;
+  animation: float 3s ease-in-out infinite;
+}
+
+.avatar-glow {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 2px solid var(--accent-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--neon-glow);
+}
+
+.podium-box .box {
+  background: linear-gradient(135deg, #ff003c 0%, #8b0021 100%);
+  padding: 15px 30px;
+  border-radius: 5px;
+  margin-top: -10px;
+  transform: skewX(-10deg);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.podium-box .pts {
+  display: block;
+  font-weight: bold;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.podium-box .rank {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.8rem;
+}
+
+/* --- LISTA DE RANKING --- */
 .ranking-table-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+  border-radius: 0;
+}
+
+ion-list {
+  background: transparent !important;
+}
+
+.pos-badge {
+  width: 30px;
+  height: 30px;
+  background: #2a2a2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  margin-right: 15px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.pos-badge.gold {
+  background: var(--accent-red);
+  color: white;
+  box-shadow: var(--neon-glow);
+}
+
+.final-pts {
+  color: var(--accent-red);
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+}
+
+/* --- FOOTER & BOTONES --- */
+.sidebar-footer {
+  position: absolute;
+  bottom: 0;
   width: 100%;
-  max-width: 700px;
-  border-radius: 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-  margin-bottom: 40px;
-  overflow: hidden;
-  --background: white;
+  padding: 20px;
+  background: linear-gradient(to top, #000, transparent);
+}
 
-  .table-header-row {
-    display: flex;
-    padding: 16px 20px;
-    background: #fbfcfe;
-    border-bottom: 1px solid #f1f5f9;
-    color: #94a3b8;
-    font-size: 0.7rem;
-    font-weight: 800;
-    letter-spacing: 1px;
+.logout-btn {
+  --border-color: var(--accent-red);
+  --color: var(--accent-red);
+  margin-top: 15px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
 
-    .col-pos { width: 70px; }
-    .col-user { flex: 1; }
-    .col-pts { width: 70px; text-align: right; }
-  }
+/* Animación Simple */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
 
-  ion-item {
-    --padding-start: 16px;
-    --inner-padding-end: 20px;
-    --min-height: 65px;
-
-    .pos-badge {
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 10px;
-      font-weight: 800;
-      margin-right: 15px;
-      background: #f1f5f9;
-      color: #475569;
-
-      &.gold { background: #fff9db; color: #fab005; }
-      &.silver { background: #f1f3f5; color: #868e96; }
-      &.bronze { background: #fff4e6; color: #fd7e14; }
-    }
-
-    ion-avatar { width: 32px; height: 32px; margin-right: 12px; }
-
-    h3 {
-      font-weight: 700;
-      color: #334155;
-      font-size: 0.95rem;
-      margin: 0;
-    }
-
-    .final-pts {
-      color: #007bff;
-      font-weight: 800;
-      font-size: 1.15rem;
-    }
-  }
+/* Scrollbar Personalizado */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-red);
 }

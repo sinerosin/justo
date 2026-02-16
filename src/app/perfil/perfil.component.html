@@ -10,7 +10,7 @@
       </div>
 
       <ion-list lines="none" class="menu-list">
-        <ion-item button (click)="navigateTo('/home')" class="active-item">
+        <ion-item button (click)="navigateTo('/home')" >
           <span class="material-symbols-outlined" slot="start">dashboard</span>
           <ion-label>PANEL</ion-label>
         </ion-item>
@@ -22,11 +22,11 @@
           <span class="material-symbols-outlined" slot="start">leaderboard</span>
           <ion-label>RANKING</ion-label>
         </ion-item>
-        <ion-item button (click)="navigateTo('/perfil')">
+        <ion-item button (click)="navigateTo('/perfil')"class="active-item">
           <span class="material-symbols-outlined" slot="start">person</span>
           <ion-label>PERFIL</ion-label>
         </ion-item>
-        <ion-item button (click)="navigateTo('/historial')">
+        <ion-item button (click)="navigateTo('/historial')" >
           <span class="material-symbols-outlined" slot="start">history</span>
           <ion-label>HISTORIAL</ion-label>
         </ion-item>
@@ -50,42 +50,65 @@
   </ion-menu>
 
   <div class="ion-page" id="main-content">
-  <ion-header class="ion-no-border">
-    <ion-toolbar color="black">
-      <ion-buttons slot="start"><ion-menu-button color="danger"></ion-menu-button></ion-buttons>
-      <ion-title>CONFIG_SISTEMA</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content class="dark-theme">
-    <div class="profile-wrapper">
-      <ion-card class="profile-main-card">
-        <div class="avatar-display">
-          <span class="material-symbols-outlined" style="font-size: 60px;">{{ selectedAvatar }}</span>
+    <ion-header class="ion-no-border">
+      <ion-toolbar color="black">
+        <ion-buttons slot="start"><ion-menu-button color="danger"></ion-menu-button></ion-buttons>
+        <div class="header-title-group">
+          <ion-title>Configuración de Perfil</ion-title>
+          <small>PERSONALIZA TU CUENTA</small>
         </div>
-        <div class="user-meta">
-          <h2>{{ currentUser.username }}</h2>
-          <p>MODO_DEVELOPER_ACTIVO</p>
-        </div>
-      </ion-card>
+        <ion-badge slot="end" class="pts-badge">{{ currentUser.points }} PTS</ion-badge>
+      </ion-toolbar>
+    </ion-header>
 
-      <div class="icon-selector-section">
-        <p class="label">ACTUALIZAR_AVATAR</p>
-        <div class="grid-icons">
-          <div *ngFor="let icon of avatarOptions" 
-               class="icon-node" 
-               [class.active]="selectedAvatar === icon"
-               (click)="selectAvatar(icon)">
-            <span class="material-symbols-outlined">{{ icon }}</span>
+    <ion-content class="dark-theme">
+      <div class="profile-wrapper">
+        
+        <ion-card class="profile-info-card">
+          <div class="avatar-large">
+            <span class="material-symbols-outlined" style="font-size: 60px;">{{ selectedAvatar }}</span>
           </div>
-        </div>
-      </div>
+          <div class="user-meta">
+            <h2>{{ currentUser.username }}</h2>
+            <p>MIEMBRO DESDE 2026</p>
+          </div>
+        </ion-card>
 
-      <ion-button expand="block" class="save-btn" (click)="saveChanges()">
-        <span class="material-symbols-outlined" slot="start">save</span>
-        GUARDAR_CAMBIOS
-      </ion-button>
-    </div>
-  </ion-content>
-</div>
+        <ion-card class="details-card">
+          <div class="card-header">
+            <ion-icon name="person-outline" color="danger"></ion-icon>
+            <h3>Detalles Públicos</h3>
+          </div>
+
+          <ion-card-content>
+            <div class="input-group">
+              <ion-label>NOMBRE DE USUARIO</ion-label>
+              <ion-item class="custom-input" lines="none">
+                <ion-icon name="id-card-outline" slot="start"></ion-icon>
+                <ion-input [(ngModel)]="newUsername" placeholder="Tu nombre"></ion-input>
+              </ion-item>
+            </div>
+
+            <div class="avatar-selector-section">
+              <ion-label>CAMBIAR ICONO DE AVATAR</ion-label>
+              <div class="icon-grid">
+                <div *ngFor="let icon of avatarOptions" 
+                     class="icon-option" 
+                     [class.active]="selectedAvatar === icon"
+                     (click)="selectAvatar(icon)">
+                  <span class="material-symbols-outlined">{{ icon }}</span>
+                </div>
+              </div>
+            </div>
+
+            <ion-button expand="block" color="danger" class="save-button" (click)="saveChanges()">
+              <ion-icon slot="start" name="save-outline"></ion-icon>
+              Confirmar Cambios
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+
+      </div>
+    </ion-content>
+  </div>
 </ion-split-pane>

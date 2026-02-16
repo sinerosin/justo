@@ -1,37 +1,69 @@
-/*
- * App Global CSS
- * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
- */
-
-/* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
-
-/* Basic CSS for apps built with Ionic */
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
-
-/* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
-
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
-
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+/* Forzar fondo oscuro en toda la app */
+:root {
+  --ion-background-color: var(--bg-black-deep) !important;
+  --ion-text-color: #ffffff !important;
+}
+
+/* Scrollbar estilo neón */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--accent-red); border-radius: 10px; }
+
+/* Títulos de sección unificados */
+.section-header {
+  padding: 20px 16px;
+  h2 {
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+    margin: 0;
+    color: #fff;
+  }
+}
+
+/* Buscador customizado */
+.custom-search {
+  --background: var(--bg-black-card);
+  --color: #fff;
+  --placeholder-color: #555;
+  --icon-color: var(--accent-red);
+  --border-radius: 10px;
+  margin: 10px 16px;
+}
+
+/* Sidebar (Menú Lateral) Unificado */
+.sidebar-content {
+  --background: var(--bg-black-deep);
+  
+  .brand-section {
+    padding: 30px 20px;
+    .neon-text { color: var(--accent-red); font-size: 35px; filter: drop-shadow(var(--neon-glow)); }
+    h3 { font-weight: 800; letter-spacing: 2px; margin: 5px 0 0; }
+  }
+
+  .menu-list ion-item {
+    --background: transparent;
+    --color: var(--text-muted);
+    margin: 5px 15px;
+    --border-radius: 8px;
+    font-weight: 700;
+
+    &.active-item {
+      --background: var(--accent-red);
+      --color: #fff;
+      box-shadow: var(--neon-glow);
+    }
+  }
+}

@@ -1,2 +1,19 @@
-// For information on how to create your own theme, please refer to:
-// https://ionicframework.com/docs/theming/
+// Paleta unificada: Negro profundo y Rojo neón
+:root {
+  --ion-color-primary: #ff003c;
+  --ion-color-primary-rgb: 255, 0, 60;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-shade: #e00035;
+  --ion-color-primary-tint: #ff1a50;
+
+  /* Fondos y Superficies */
+  --bg-black-deep: #050505;
+  --bg-black-card: #0d0d0d;
+  --bg-black-soft: #151515;
+  
+  /* Acentos y Efectos */
+  --accent-red: #ff003c;
+  --neon-glow: 0 0 15px rgba(255, 0, 60, 0.4);
+  --border-subtle: 1px solid #222;
+  --text-muted: #888;
+}

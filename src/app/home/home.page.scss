@@ -1,40 +1,27 @@
+.match-card {
+  background: var(--bg-black-card);
+  border: var(--border-subtle);
+  border-left: 4px solid var(--accent-red);
+  border-radius: 12px;
+  margin: 10px 16px;
+  transition: transform 0.2s ease;
 
-:host {
-  --bg-black: #050505;
-  --card-dark: #0d0d0d;
-  --accent-red: #ff003c;
-  --neon-glow: 0 0 10px rgba(255, 0, 60, 0.4);
-}
+  &:hover { transform: translateY(-3px); box-shadow: var(--neon-glow); }
 
-.main-container { --background: var(--bg-black); }
-
-.sidebar-content {
-  --background: var(--bg-black);
-  .brand-section {
-    padding: 30px 20px; display: flex; align-items: center; gap: 12px;
-    .neon-text { color: var(--accent-red); font-size: 32px; filter: drop-shadow(var(--neon-glow)); }
-    h3 { color: #fff; margin: 0; font-weight: 800; letter-spacing: 2px; }
-  }
-  .menu-list ion-item {
-    --background: transparent; --color: #555; margin: 8px 15px; font-weight: 700;
-    &.active-item { --color: #fff; border-left: 3px solid var(--accent-red); background: rgba(255,0,60,0.05); }
-  }
-  .sidebar-footer {
-    padding: 20px;
-    .user-item { 
-      --background: #111; border: 1px solid #222; 
-      .avatar-sidebar { border: 1px solid var(--accent-red); color: var(--accent-red); display: flex; padding: 4px; }
+  .scoreboard {
+    display: flex; justify-content: space-around; align-items: center; padding: 20px 0;
+    .score { font-size: 2rem; font-weight: 900; text-shadow: var(--neon-glow); }
+    
+    .team {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      img { width: 45px; height: 45px; object-fit: contain; } // Escudos Dashboard
+      span { font-size: 0.8rem; font-weight: 700; }
     }
   }
 }
 
-.match-card {
-  background: var(--card-dark); border: 1px solid #1a1a1a; border-left: 4px solid var(--accent-red);
-  .scoreboard { 
-    display: flex; justify-content: space-around; align-items: center; padding: 20px 0;
-    .score { font-size: 2rem; font-weight: 900; color: #fff; text-shadow: var(--neon-glow); }
-    .team img { width: 40px; filter: grayscale(0.5); }
-  }
+.detail-btn {
+  --background: var(--accent-red);
+  font-weight: 800;
+  margin: 0 15px 15px;
 }
-
-.detail-btn { --background: var(--accent-red); --box-shadow: var(--neon-glow); font-weight: 800; }
